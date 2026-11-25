@@ -1,0 +1,41 @@
+{
+    "project": "Agentic Code Reviewer",
+    "source_file": "sample_code\\bad_code.py",
+    "overall_risk": "HIGH",
+    "total_findings": 4,
+    "severity_counts": {
+        "HIGH": 1,
+        "MEDIUM": 3,
+        "LOW": 0
+    },
+    "findings": [
+        {
+            "severity": "HIGH",
+            "category": "SQL Injection",
+            "line": 2,
+            "description": "The `user_id` is directly concatenated into the SQL query, which can lead to SQL injection if `user_id` is not properly sanitized.",
+            "recommendation": "Use parameterized queries to prevent SQL injection. For example:\nquery = \"SELECT * FROM users WHERE id=%s\"\nreturn db.execute(query, (user_id,))"
+        },
+        {
+            "severity": "MEDIUM",
+            "category": "BUG",
+            "line": 7,
+            "description": "Variable 'b' may be zero, causing ZeroDivisionError.",
+            "recommendation": "Validate that b is not zero before division."
+        },
+        {
+            "severity": "MEDIUM",
+            "category": "BUG",
+            "line": 12,
+            "description": "Dictionary key 'name' may be missing, causing KeyError.",
+            "recommendation": "Use user.get(\"name\") or check whether the key exists."
+        },
+        {
+            "severity": "MEDIUM",
+            "category": "CODE_QUALITY",
+            "line": 13,
+            "description": "Bare exception handling silently ignores exceptions using pass.",
+            "recommendation": "Catch specific exceptions and log or handle them appropriately."
+        }
+    ]
+}
